@@ -41,6 +41,16 @@ app.component('product-display', {
           >
             Add to Cart
           </button>
+
+          <button 
+            class="button" 
+            @click="deleteFromCart" 
+            :class="{ disabledButton: !inStock }"
+            :disabled="!inStock"
+          >
+            Remove
+          </button>
+
       </div>
 
     </div>
@@ -60,7 +70,10 @@ app.component('product-display', {
   },
   methods: {
     addToCart() {
-      this.cart += 1
+      this.$emit('add-to-cart', this.variants[this.selectedVariant].id)
+    },
+    deleteFromCart() {
+      this.$emit('del-from-cart')
     },
     updateVariant(index) {
       this.selectedVariant = index
