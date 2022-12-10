@@ -13,13 +13,15 @@
     <div class="cart">Cart({{ cart }})</div>
     <div class="product-display">
       <div class="product-container">
+
         <div class="product-image">
           <img :src="image">
         </div>
+
         <div class="product-info">
-          <h1>{{ product }}</h1>
-          <p v-if="inventory > 10">In Stock</p>
-          <p v-else-if="inventory <= 10 && inventory > 0">Almost sold out!</p>
+
+          <h1>{{ title }}</h1>
+          <p v-if="inStock">In Stock</p>
           <p v-else>Out of Stock</p>
 
           <ul>
@@ -27,9 +29,9 @@
           </ul>
 
             <div 
-              v-for="varian in variants" 
+              v-for="(varian, index) in variants" 
               :key="varian.id" 
-              @mouseover="updateImage(varian.image)"
+              @mouseover="updateVariant(index)"
               class="color-circle"
               :style="{ backgroundColor: varian.color }">
             </div>
@@ -40,9 +42,10 @@
               :class="{ disabledButton: !inStock }"
               :disabled="!inStock"
             >
-              Add Cart
+              Add to Cart
             </button>
         </div>
+
       </div>
     </div>
   </div>
