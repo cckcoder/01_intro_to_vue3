@@ -34,7 +34,16 @@ app.component('review-form', {
         rating: this.rating
       }
 
+      if (this.name === '' || this.review === '' || this.rating === null) {
+        alert('Review is incomplete. Please fill out every field.') 
+        return
+      }
+
       this.$emit('review-submitted', productReview)
+      this.name = ''
+      this.review = ''
+      this.rating = null
+
     }
   }
 })
